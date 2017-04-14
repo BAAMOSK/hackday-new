@@ -1,0 +1,45 @@
+* {
+ 
+}
+
+.everything{
+	margin-left: 20px;
+}
+
+.wi{
+  font-size: 5em;
+  color: darkorange;
+}
+
+div img{
+  min-width: 120px;
+}
+
+main{
+	
+}
+
+body{
+  padding-top: 100px;
+	background-color: #E8F8F1;
+}
+
+.center {
+	text-align: center;
+}
+
+button {	
+	max-width: calc( 20% - 5px );
+}
+
+.form-control {
+	margin: 0;
+	width: 100%;
+	max-width: 100%;
+}
+
+@media (min-width: 600px) {
+  .form-control {
+    min-width: calc( 75% - 10px );
+  }
+}

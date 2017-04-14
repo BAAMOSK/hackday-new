@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Get Sunshinez</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/flick/jquery-ui.css" />
+	<link rel="stylesheet" href="assets/css/weather-icons.min.css">
+	<link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/flick/jquery-ui.css" />
+	<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+	<main>
+	<div class="container">
+		<form class="row form-inline">
+			<button class="col-md-2 btn btn-primary align-top" id="geoLocate">GEOLOCATE</button>
+			<input class="col-md-9 form-control align-top" id="search-field" type="text" placeholder="Enter your city...">
+		</form>
+	</div>
+		<div class="weather-container row">
+		
+		<div class="weather-container container-fluid">
+			<div class="row">
+				<div id="heroLocation" class="col-md-2 center"></div>
+				<div id="heroBox" class="col-md-8 center"></div>
+				<div id="heroData" class="col-md-2 center"></div>
+			</div>
+			<div class="row">
+				<div id="box1" class="col-md-3 center"></div>
+				<div id="box2" class="col-md-3 center"></div>
+				<div id="box3" class="col-md-3 center"></div>
+				<div id="box4" class="col-md-3 center"></div>
+			</div>
+	<!--		This is where we will render all HTML	-->
+		</div>
+		</div>
+	</main>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
+	<script src="https://use.fontawesome.com/e5da894dce.js"></script>
+	<script src="assets/js/app.js"></script>
+</body>
+</html>

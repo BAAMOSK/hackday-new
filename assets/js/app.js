@@ -95,6 +95,7 @@ vF = {
 
 				Weather: ${val.weather}<br>
 				Temperature: ${val.farenheit}<br>
+				windSpeed: ${val.windSpeed}<br>
 				`
 
 			});

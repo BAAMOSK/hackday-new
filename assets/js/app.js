@@ -87,19 +87,18 @@ vF = {
 
 	makeWeatherStuff: function(arr){
 		arr = arr.map(function(holderArray){
-			let returnString = `<h3>${holderArray[0].day}</h3>`;
+			let returnString = `<div class = "card-block"><h3>${holderArray[0].day}</h3>`;
 			holderArray.forEach(function(val,index){
 				returnString += `
+
 				<h4><img src='http://openweathermap.org/img/w/${val.icon}.png'>${val.hour}</h4>
-
-
-				Weather: ${val.weather}<br>
-				Temperature: ${val.farenheit}<br>
-				windSpeed: ${val.windSpeed}<br>
+				<span class = "underline">Weather: <span class='float-right'>${val.weather}</span</span><br>
+				<span class = "underline">Temperature: <span class='float-right'>${val.farenheit}</span></span><br>
+				<span class = "underline">windSpeed: <span class='float-right'>${val.windSpeed}</span></span>
 				`
 
 			});
-
+			returnString += `</div>`
 			return returnString;
 		});
 		return arr;

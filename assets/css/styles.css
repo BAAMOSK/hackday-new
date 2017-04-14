@@ -16,7 +16,9 @@ div img{
 }
 
 main{
-
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 body{
@@ -42,4 +44,26 @@ button {
   .form-control {
     min-width: calc( 75% - 10px );
   }
+}
+
+h4{
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.card-block{
+
+  background: white;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px grey;
+  margin: 10px 0 10px 0;
+
+  padding: 5px;
+}
+
+.underline{
+  border-bottom: 1px solid black;
+}
+.float-right{
+  
 }

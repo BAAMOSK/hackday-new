@@ -1,17 +1,10 @@
 //state object
 let s = {
+	//object is what is returned from getJSON request 
 	object : {},
+	//weather is parsed result
   weather: [],
-
   weatherAPIKey: 'appid=22bb9867ef69b1e3bad17c9e2f85d1a1',
-  geoKey: 'key=AIzaSyDaLi4kejMskpWXIeVQwXWMviWSoj-ZQOA',
-  weatherIcons: {
-    sunny: `<i class="wi wi-day-sunny "></i>`,
-    cloudy: `<i class="wi wi-cloudy"></i>`,
-    rainy: `<i class="wi wi-rain"></i>`,
-    thunder: `<i class="wi wi-thunderstorm"></i>`,
-    snow: `<i class="wi wi-snow"></i>`,
-  },
 	autoCompleteCity: ''
 }
 
@@ -20,7 +13,7 @@ sF = {
   self: this,
 	getWeather: function(search){
 
-		$.getJSON(`http://api.openweathermap.org/data/2.5/forecast?${search}&type=like&${s.weatherAPIKey}`,function(data){
+		$.getJSON(`http://api.openweathermap.org/data/2.5/forecast?${search}&type=like&${s.weatherAPIKey}`, function(data){
 				s.object = data.list;
         //console.log("test")
 				sF.parseWeather(s.object);
@@ -39,7 +32,7 @@ sF = {
     s.weather = [];
 		for(let i=0;i<40;i++){
 			var day = {};
-		day.id = data[i].weather[0].id;
+		day.id = data[i].weather[0].id; 
     day.icon = data[i].weather[0].icon;
 		day.weather = data[i].weather[0].main;
 		day.farenheit = ((data[i].main.temp*(9/5))-459.67).toFixed(0);
@@ -78,7 +71,8 @@ vF = {
   //populate the windows
   populateWeatherBoxes: function(arrOfStrings){
     //$('#heroLocation').html(`<p>${s.autoCompleteCity}</p>`);
-    $('#heroBox').html(arrOfStrings[0]);
+		var city = `<h2>Weather in ${s.autoCompleteCity}</h2>`;
+    $('#heroBox').html(city + arrOfStrings[0]);
     $('#box1').html(arrOfStrings[1]);
     $('#box2').html(arrOfStrings[2]);
     $('#box3').html(arrOfStrings[3]);

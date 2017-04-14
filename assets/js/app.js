@@ -1,6 +1,6 @@
 //state object
 let s = {
-	//object is what is returned from getJSON request 
+	//object is what is returned from getJSON request
 	object : {},
 	//weather is parsed result
   weather: [],
@@ -10,16 +10,16 @@ let s = {
 
 //state manipulation functions
 sF = {
-	getWeather: function(search){		
+	getWeather: function(search){
 		$.getJSON(`http://api.openweathermap.org/data/2.5/forecast?${search}&type=like&${s.weatherAPIKey}`, function(data){
-		  //api return object 
+		  //api return object
 			//set state object to data
 			s.object = data.list;
 			//separates data into properties
-			//makes data easier to use			
+			//makes data easier to use
 			s.weather = sF.parseWeather(s.object);
 			sortedArr = sF.sortByDay(s.weather);
-			
+
 			//Generate HTML to render, then renders
       vF.populateWeatherBoxes(vF.makeWeatherStuff(sortedArr));
 		});
@@ -29,12 +29,12 @@ sF = {
     let weather = [];
 		for(let i=0; i < data.length; i++){
 			var day = {};
-			day.id = data[i].weather[0].id; 
+			day.id = data[i].weather[0].id;
 			day.icon = data[i].weather[0].icon;
 			day.weather = data[i].weather[0].main;
 			day.farenheit = ((data[i].main.temp*(9/5))-459.67).toFixed(0);
 			day.celsius = (data[i].main.temp-273.15).toFixed(0);
-			day.windSpeed = data[i].wind.speed;
+			day.windSpeed = (data[i].wind.speed * 2.236).toFixed(2);
 			day.day = data[i].dt_txt.slice(0,11);
 			day.hour = data[i].dt_txt.slice(11);
 			weather.push(day);
@@ -52,7 +52,7 @@ sF = {
 		});
 	},
 	//uses underscore.js to group weather objects by their day
-	//returns an array 
+	//returns an array
 	sortByDay: function(weather){
 		//sorts into object by key
 		let sortedObject = _.groupBy(weather,'day');
@@ -66,7 +66,7 @@ sF = {
 };
 
 //view manipulation functions
-vF = {  
+vF = {
   populateWeatherBoxes: function(arrOfStrings){
 		var city = `<h2>${s.autoCompleteCity}</h2>`;
     $('#heroBox').html(city + arrOfStrings[0]);
@@ -75,7 +75,7 @@ vF = {
     $('#box3').html(arrOfStrings[3]);
     $('#box4').html(arrOfStrings[4]);
   },
-  //takes sorted weather arrays 
+  //takes sorted weather arrays
 	//creates HTML elements for render
 	//adds into array and returns it
 	makeWeatherStuff: function(arr){
@@ -85,8 +85,8 @@ vF = {
 			holderArray.forEach(function(val,index){
 				returnString += `<h4><img src='http://openweathermap.org/img/w/${val.icon}.png'>${val.hour}</h4>
 												<span class = "underline">Weather: <span class='float-right'>${val.weather}</span</span><br>
-												<span class = "underline">Temperature: <span class='float-right'>${val.farenheit}</span></span><br>
-												<span class = "underline">windSpeed: <span class='float-right'>${val.windSpeed}</span></span>`
+												<span class = "underline">Temperature: <span class='float-right'>${val.farenheit}F</span></span><br>
+												<span class = "underline">windSpeed: <span class='float-right'>${val.windSpeed}mph</span></span>`
 			});
 			returnString += `</div>`;
 			return returnString;
@@ -106,7 +106,7 @@ $('#geoLocate').click(function(event) {
 $('#search-field').keypress(function(event){
   if(event.charCode=='13'){
     event.preventDefault();
-    sF.getWeather('q='+$(this).val().toString());		
+    sF.getWeather('q='+$(this).val().toString());
   }
 });
 
@@ -125,7 +125,7 @@ $("#search-field").autocomplete({
 		response(data);
 	 });
   },
-	
+
  //jQuery UI stuff.  UI is the item selected in the dropdown.
  //Then we make the search field = the selected item
   select: function (event, ui) {

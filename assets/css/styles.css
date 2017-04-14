@@ -1,5 +1,35 @@
 * {
+  font-family: 'Overpass', sans-serif;
+}
 
+body{
+  padding-top: 10px;
+	background-color: #E8F8F1;
+}
+
+main{
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1{
+  font-family: 'Rubik Mono One', sans-serif;
+  padding-bottom: 15px;
+  color: darkorange;
+}
+
+h4{
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+button {
+	max-width: calc( 20% - 5px );
+}
+
+div img{
+  min-width: 60px;
 }
 
 .everything{
@@ -11,44 +41,17 @@
   color: darkorange;
 }
 
-div img{
-  min-width: 60px;
-}
-
-main{
-  max-width: 920px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-body{
-  padding-top: 100px;
-	background-color: #E8F8F1;
-}
-
 .center {
 	text-align: center;
 }
 
-button {
-	max-width: calc( 20% - 5px );
-}
+
 
 .form-control {
 	margin: 0;
 	width: 100%;
 	max-width: 100%;
-}
-
-@media (min-width: 600px) {
-  .form-control {
-    min-width: calc( 75% - 10px );
-  }
-}
-
-h4{
-  margin-bottom: 0;
-  padding-bottom: 0;
+  min-width: 75%;
 }
 
 .card-block{
@@ -64,6 +67,16 @@ h4{
 .underline{
   border-bottom: 1px solid black;
 }
-.float-right{
-  
+
+.leading-image{
+  min-width: 40px;
+  padding-left: 0px;
+
+}
+.leadin
+
+@media (min-width: 770px) {
+  .form-control {
+    min-width: calc( 75% - 10px );
+  }
 }

@@ -90,11 +90,11 @@ vF = {
 			let returnString = `<h3>${holderArray[0].day}</h3>`;
 			holderArray.forEach(function(val,index){
 				returnString += `
-				<h4>${val.hour}<h4>
-				<img src='http://openweathermap.org/img/w/${val.icon}.png'>
-				<span>Weather: ${val.weather}</span>
-				<span>Temperature: ${val.farenheit}</span>
+				<h4><img src='http://openweathermap.org/img/w/${val.icon}.png'>${val.hour}</h4>
 
+
+				Weather: ${val.weather}<br>
+				Temperature: ${val.farenheit}<br>
 				`
 
 			});

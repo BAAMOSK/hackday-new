@@ -39,6 +39,7 @@ sF = {
 		day.farenheit = ((data[i].main.temp*(9/5))-459.67).toFixed(0);
 		day.celsius = (data[i].main.temp-273.15).toFixed(0);
 		day.windSpeed = data[i].wind.speed;
+		day.day = data[i].dt_txt.slice(0,11);
 		s.weather.push(day);
 		}
 	},
@@ -51,15 +52,9 @@ sF = {
 			let input = `${lat}&${lon}`;
 			sF.getWeather(input);
 		});
-	},	
+	}	
 	
-//	currentTime: function() {
-//		let today = new Date();
-//		let dd = today.getDate();
-//		let mm = today.getMonth()+1;
-//		let yyyy = today.getFullYear();
-//		s.today = dd
-//	}	
+
 };
 
 //view manipulation functions
@@ -67,14 +62,13 @@ vF = {
   //populate the windows
   populateWeatherBoxes: function(){
     $('#heroLocation').html(`<p>${s.autoCompleteCity}</p>`);
-    $('#heroBox').html(`<h2>${''}</h2><img src='http://openweathermap.org/img/w/${s.weather[0].icon}.png'><br>${s.weather[0].weather}`);
-    $('#heroData').html(`<span>Temperature: ${s.weather[0].farenheit}&deg;</span><br>
-												 <span>Temperature: ${s.weather[0].celsius}&deg;</span><br>
-                         <span>Wind Speed: ${s.weather[0].windSpeed}</span>`)
-    $('#box1').html(`<img src='http://openweathermap.org/img/w/${s.weather[1].icon}.png'><br>${s.weather[1].weather}`);
-    $('#box2').html(`<img src='http://openweathermap.org/img/w/${s.weather[2].icon}.png'><br>${s.weather[2].weather}`);
-    $('#box3').html(`<img src='http://openweathermap.org/img/w/${s.weather[3].icon}.png'><br>${s.weather[3].weather}`);
-    $('#box4').html(`<img src='http://openweathermap.org/img/w/${s.weather[4].icon}.png'><br>${s.weather[4].weather}`);
+    $('#heroBox').html(`<h2>${s.weather[0].day}</h2><img src='http://openweathermap.org/img/w/${s.weather[0].icon}.png'><br>${s.weather[0].weather}<br><span>Temperature: ${s.weather[0].farenheit}&deg;F</span><span> / ${s.weather[0].celsius}&deg;C</span><br>
+                         <span>Wind Speed: ${s.weather[0].windSpeed}</span>`);
+    
+    $('#box1').html(`<h2>${s.weather[1].day}</h2><img src='http://openweathermap.org/img/w/${s.weather[1].icon}.png'><br>${s.weather[1].weather}`);
+    $('#box2').html(`<h2>${s.weather[2].day}</h2><img src='http://openweathermap.org/img/w/${s.weather[2].icon}.png'><br>${s.weather[2].weather}`);
+    $('#box3').html(`<h2>${s.weather[3].day}</h2><img src='http://openweathermap.org/img/w/${s.weather[3].icon}.png'><br>${s.weather[3].weather}`);
+    $('#box4').html(`<h2>${s.weather[4].day}</h2><img src='http://openweathermap.org/img/w/${s.weather[4].icon}.png'><br>${s.weather[4].weather}`);
   }
 }
 

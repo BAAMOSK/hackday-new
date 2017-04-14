@@ -1,5 +1,5 @@
 * {
- 
+
 }
 
 .everything{
@@ -12,11 +12,11 @@
 }
 
 div img{
-  min-width: 120px;
+  min-width: 60px;
 }
 
 main{
-	
+
 }
 
 body{
@@ -28,7 +28,7 @@ body{
 	text-align: center;
 }
 
-button {	
+button {
 	max-width: calc( 20% - 5px );
 }
 

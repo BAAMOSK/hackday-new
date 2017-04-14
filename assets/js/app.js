@@ -24,14 +24,20 @@ sF = {
 				s.object = data.list;
         //console.log("test")
 				sF.parseWeather(s.object);
+				sortedArr = sF.sortByDay(s.weather);
+				//console.log('sortedArr is: ')
+				//console.log(sortedArr);
+				let cleanedWeather = vF.makeWeatherStuff(sortedArr);
+				console.log("cleaned array is: ")
+				console.log(cleanedWeather)
         //populate boxes
-        vF.populateWeatherBoxes()
+        vF.populateWeatherBoxes(cleanedWeather);
 		});
   },
 
 	parseWeather: function(data) {
     s.weather = [];
-		for(let i=4;i<40;i+=8){
+		for(let i=0;i<40;i++){
 			var day = {};
 		day.id = data[i].weather[0].id;
     day.icon = data[i].weather[0].icon;
@@ -40,37 +46,65 @@ sF = {
 		day.celsius = (data[i].main.temp-273.15).toFixed(0);
 		day.windSpeed = data[i].wind.speed;
 		day.day = data[i].dt_txt.slice(0,11);
+		day.hour = data[i].dt_txt.slice(11);
 		s.weather.push(day);
 		}
 	},
 
 	geolocate: function() {
 		let location = navigator.geolocation.getCurrentPosition(function(position) {
-      console.log("Running geolocation");
+      //console.log("Running geolocation");
 			let lat = `lat=${position.coords.latitude}`;
 			let lon = `lon=${position.coords.longitude}`;
 			let input = `${lat}&${lon}`;
 			sF.getWeather(input);
 		});
-	}	
-	
+	},
+	sortByDay: function(weather){
+		let sortedObject = _.groupBy(weather,'day');
+		let returnArr= [];
+		Object.keys(sortedObject).forEach(function(key){
+			returnArr.push(sortedObject[key])
+		});
+		//console.log(returnArr);
+		return returnArr;
+	}
+
 
 };
 
 //view manipulation functions
 vF = {
   //populate the windows
-  populateWeatherBoxes: function(){
-    $('#heroLocation').html(`<p>${s.autoCompleteCity}</p>`);
-    $('#heroBox').html(`<h2>${s.weather[0].day}</h2><img src='http://openweathermap.org/img/w/${s.weather[0].icon}.png'><br>${s.weather[0].weather}<br><span>Temperature: ${s.weather[0].farenheit}&deg;F</span><span> / ${s.weather[0].celsius}&deg;C</span><br>
-                         <span>Wind Speed: ${s.weather[0].windSpeed}</span>`);
-    
-    $('#box1').html(`<h2>${s.weather[1].day}</h2><img src='http://openweathermap.org/img/w/${s.weather[1].icon}.png'><br>${s.weather[1].weather}`);
-    $('#box2').html(`<h2>${s.weather[2].day}</h2><img src='http://openweathermap.org/img/w/${s.weather[2].icon}.png'><br>${s.weather[2].weather}`);
-    $('#box3').html(`<h2>${s.weather[3].day}</h2><img src='http://openweathermap.org/img/w/${s.weather[3].icon}.png'><br>${s.weather[3].weather}`);
-    $('#box4').html(`<h2>${s.weather[4].day}</h2><img src='http://openweathermap.org/img/w/${s.weather[4].icon}.png'><br>${s.weather[4].weather}`);
-  }
+  populateWeatherBoxes: function(arrOfStrings){
+    //$('#heroLocation').html(`<p>${s.autoCompleteCity}</p>`);
+    $('#heroBox').html(arrOfStrings[0]);
+    $('#box1').html(arrOfStrings[1]);
+    $('#box2').html(arrOfStrings[2]);
+    $('#box3').html(arrOfStrings[3]);
+    $('#box4').html(arrOfStrings[4]);
+  },
+
+	makeWeatherStuff: function(arr){
+		arr = arr.map(function(holderArray){
+			let returnString = `<h3>${holderArray[0].day}</h3>`;
+			holderArray.forEach(function(val,index){
+				returnString += `
+				<h4>${val.hour}<h4>
+				<img src='http://openweathermap.org/img/w/${val.icon}.png'>
+				<span>Weather: ${val.weather}</span>
+				<span>Temperature: ${val.farenheit}</span>
+
+				`
+
+			});
+
+			return returnString;
+		});
+		return arr;
+	}
 }
+
 
 
 
@@ -79,22 +113,12 @@ $('#geoLocate').click(function(event) {
   event.preventDefault();
 
 });
-//
-//Search field stuff
-//
-/*
-$('#searchForm').submit(function(event){
-  event.preventDefault();
-  console.dir(event);
-  //sF.getWeather('q='+$('#searchForm').val().toString())
-})
-*/
 
 $('#search-field').keypress(function(event){
   //console.log(event.charCode);
-  if(event.charCode=='13'){		
+  if(event.charCode=='13'){
     event.preventDefault();
-    sF.getWeather('q='+$(this).val().toString());	
+    sF.getWeather('q='+$(this).val().toString());
 		console.log(s.autoCompleteCity);
   }
 })

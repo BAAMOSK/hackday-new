@@ -1,8 +1,8 @@
 //state object
 let s = {
-	//object is what is returned from getJSON request
+//object is what is returned from getJSON request
   object : {},
-	//weather is parsed result
+//weather is parsed result
   weather: [],
   weatherAPIKey: 'appid=22bb9867ef69b1e3bad17c9e2f85d1a1',
   autoCompleteCity: ''
